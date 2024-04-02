@@ -11,16 +11,22 @@
  * 힌트 : 정렬 함수에는 sort와 toSorted가 있습니다.
  */
 
+// function getSortedBooks(books) {
+//   books.toSorted((a, b) => {
+//     if( a.published.getTime() > b.published.getTime()){
+//       return -1; 
+//     } else if (a.published.getTime() < b.published.getTime()){
+//       return 1
+//     }else{
+//       return 0; 
+//     }
+//   }).map((item) => console.log(item))
+// }
+
 function getSortedBooks(books) {
-  books.toSorted((a, b) => {
-    if( a.published.getTime() > b.published.getTime()){
-        return -1; 
-    } else if (a.published.getTime() < b.published.getTime()){
-      return 1
-    }else{
-      return 0; 
-    }
-  }).map((item) => console.log(item))
+  return books.toSorted((a, b) => {
+    return  b.published.getTime() - a.published.getTime()
+  })
 }
 
 const sortedBooks = getSortedBooks([

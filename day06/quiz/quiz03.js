@@ -10,7 +10,7 @@
  */
 
 function getDiscountedMenus(menus) {
-  menus.map((item) => {
+  return menus.map((item) => {
     console.log({...item, discountedPrice : item.price - 500})
   })
 }

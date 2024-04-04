@@ -138,4 +138,4 @@ npm run dev
 </body>
 ```
 
-- index.html 스크립트태그로 불러오고 src폴더 아래 `main.tsx` 라는 자바스크립트 파일이 실행 되었을 때 동적으로 추가되는 요소
+- index.html 파일을 브라우저에 보내고 index.html 파일에서는 main.jsx 자바스크립트 파일을 실행이 자바스크립트 파일에서 ReactDOM.createRoot() 메서드는 인수로 받은 HTML 요소를 리액트의 루트로 만들어ㄷ준다. 그리고 render() 메서드를 통해 루트 아래에 컴포넌트가 리턴하는 html 요소를 화면에 렌더링 한다.

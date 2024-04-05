@@ -1,4 +1,5 @@
 import './App.css';
+import OrderEditor from './components/OrderEditor';
 import Welcome from './components/Welcome';
 
 function App() {
@@ -6,7 +7,12 @@ function App() {
     name: '홍길동',
     isMember: false,
   };
-  return <Welcome {...user} />;
+  return (
+    <>
+      <Welcome {...user} />
+      <OrderEditor />
+    </>
+  );
 }
 
 export default App;

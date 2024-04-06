@@ -1,36 +1,50 @@
-import { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useRef, useState } from 'react';
+
+type OrderProps = {
+  menu: string;
+  address: string;
+  request: string;
+};
+
+const nullOrder: OrderProps = {
+  menu: '',
+  address: '',
+  request: '',
+};
 
 const OrderEditor = () => {
-  const [menu, setMenu] = useState('족발');
-  const [address, setAddress] = useState('');
-  const [request, setRequest] = useState('');
+  const menuSelect = useRef<HTMLSelectElement>(null);
+  const addressInput = useRef<HTMLInputElement>(null);
+  const requestTextarea = useRef<HTMLTextAreaElement>(null);
 
-  const handleChangeMenu = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setMenu(e.target.value);
-  };
+  const [order, setOrder] = useState<OrderProps>(nullOrder);
 
-  const handleChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
-  };
-
-  const handleChangeRequest = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setRequest(e.target.value);
+  const handleChange = (e: React.ChangeEvent<any>) => {
+    setOrder({ ...order, [e.target.name]: e.target.value });
   };
 
   const onSubmit = () => {
-    if (!address) {
-      alert('배달주소를 입력해주세요!');
+    if (!order.menu) {
+      menuSelect.current?.focus();
       return;
     }
 
-    if (!request) {
-      alert('요정사항을 입력해주세요!');
+    if (!order.address) {
+      addressInput.current?.focus();
+      return;
+    }
+
+    if (!order.request) {
+      requestTextarea.current?.focus();
       return;
     }
 
     alert(
-      `주문이 완료되었습니다.\n 메뉴 : ${menu}\n 주소 : ${address}\n 요청사항 : ${request}`
+      `주문이 완료되었습니다.\n 메뉴 : ${order.menu}\n 주소 : ${order.address}\n 요청사항 : ${order.request}`
     );
+
+    setOrder(nullOrder);
   };
 
   return (
@@ -39,10 +53,13 @@ const OrderEditor = () => {
       <div>
         <div style={{ marginBottom: 5, fontSize: 14 }}>메뉴 선택</div>
         <select
+          ref={menuSelect}
           style={{ width: 300, padding: 5 }}
-          value={menu}
-          onChange={handleChangeMenu}
+          name="menu"
+          value={order.menu}
+          onChange={handleChange}
         >
+          <option value={''}>메뉴를 선택해주세요.</option>
           <option value={'족발'}>족발</option>
           <option value={'떡볶이'}>떡볶이</option>
           <option value={'아이스크림'}>아이스크림</option>
@@ -52,19 +69,23 @@ const OrderEditor = () => {
       <div>
         <div style={{ marginBottom: 5, fontSize: 14 }}>배달 주소</div>
         <input
+          ref={addressInput}
           style={{ width: 300, padding: 5 }}
           placeholder="주소) 서울특별시 xx동 .."
-          value={address}
-          onChange={handleChangeAddress}
+          name="address"
+          value={order.address}
+          onChange={handleChange}
         />
       </div>
       <div>
         <div style={{ marginBottom: 5, fontSize: 14 }}>배달 요청사항</div>
         <textarea
+          ref={requestTextarea}
           style={{ width: 300, padding: 5 }}
           placeholder="배달 요청사항을 써 주세요..."
-          value={request}
-          onChange={handleChangeRequest}
+          name="request"
+          value={order.request}
+          onChange={handleChange}
         />
       </div>
       <div>

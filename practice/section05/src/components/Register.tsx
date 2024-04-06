@@ -4,45 +4,62 @@
 // 3. 국적
 // 4. 자기소개
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+
+type InputType = {
+  name: string;
+  birth: string;
+  country: string;
+  bio: string;
+};
+
+const nullInput: InputType = {
+  name: '',
+  birth: '',
+  country: '',
+  bio: '',
+};
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [birth, setBirth] = useState('');
-  const [country, setCountry] = useState('');
-  const [bio, setBio] = useState('');
+  const [input, setInput] = useState(nullInput);
+  const countRef = useRef(0);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+  const handleOnChange = (e: React.ChangeEvent<any>) => {
+    countRef.current++;
+    console.log(countRef.current);
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const onChangeBirth = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBirth(e.target.value);
-  };
-
-  const onChangeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCountry(e.target.value);
-  };
-
-  const onChangeBio = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setBio(e.target.value);
+  const onSubmit = () => {
+    if (input.name === '') {
+      // 이름을 입력하는 DOM 요소 포커스
+      inputRef.current?.focus();
+    }
   };
 
   return (
     <div>
       <p>
         <input
+          ref={inputRef}
           type="text"
           placeholder={'이름'}
-          value={name}
-          onChange={onChangeName}
+          name="name"
+          value={input.name}
+          onChange={handleOnChange}
         />
       </p>
       <p>
-        <input type="date" value={birth} onChange={onChangeBirth} />
+        <input
+          type="date"
+          name="birth"
+          value={input.birth}
+          onChange={handleOnChange}
+        />
       </p>
       <p>
-        <select value={country} onChange={onChangeCountry}>
+        <select name="country" value={input.country} onChange={handleOnChange}>
           <option value={''}>국적을 선택해주세요!</option>
           <option value={'kr'}>한국</option>
           <option value={'us'}>미국</option>
@@ -51,11 +68,15 @@ const Register = () => {
       </p>
       <div>
         <textarea
+          name="bio"
           placeholder="자기소개를 입력해주세요."
-          value={bio}
-          onChange={onChangeBio}
+          value={input.bio}
+          onChange={handleOnChange}
         ></textarea>
       </div>
+      <button type="button" onClick={onSubmit}>
+        제출
+      </button>
     </div>
   );
 };

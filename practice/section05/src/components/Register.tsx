@@ -20,14 +20,19 @@ const nullInput: InputType = {
   bio: '',
 };
 
+// let count = 0;  👈🏻 컴포넌트 외부에 변수가 있게 된다면 Register 컴포넌트가 2번 호출되게 되면 해당 값을 공유 하게 된다.
 const Register = () => {
   const [input, setInput] = useState(nullInput);
   const countRef = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // let count = 0; 👈🏻 Register 컴포넌트가 리렌더링 되면서 해당 변수 초기화 되므로 콘솔 출력값은 1
+
   const handleOnChange = (e: React.ChangeEvent<any>) => {
     countRef.current++;
     console.log(countRef.current);
+    // count++;
+    // console.log(count);
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 

@@ -1,11 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useRef, useState } from 'react';
+import { useReducer, useRef } from 'react';
 
 import './App.scss';
 
 import Header from './components/Header';
 import Editor from './components/Editor';
 import List from './components/List';
+
+import { TodoItemType } from './types';
 
 export const mockData = [
   {
@@ -28,30 +30,58 @@ export const mockData = [
   },
 ];
 
+type actionType = {
+  type: string;
+  data?: TodoItemType;
+  targetId?: number;
+};
+
+const reducer = (state: TodoItemType[], action: actionType): TodoItemType[] => {
+  switch (action.type) {
+    case 'CREATE': {
+      return action.data ? [action.data, ...state] : state;
+    }
+    case 'UPDATE': {
+      return state.map((item) =>
+        item.id === action.targetId ? { ...item, isDone: !item.isDone } : item
+      );
+    }
+    case 'DELETE': {
+      return state.filter((item) => item.id !== action.targetId);
+    }
+    default:
+      return state;
+  }
+};
+
 function App() {
   const idRef = useRef(3);
-  const [todoList, setTodoList] = useState(mockData);
+  const [todoList, dispatch] = useReducer(reducer, mockData);
 
   const onCreate = (content: string) => {
-    const newTodo = {
-      id: idRef.current++,
-      isDone: false,
-      content,
-      date: new Date().getTime(),
-    };
-    setTodoList([newTodo, ...todoList]);
+    dispatch({
+      type: 'CREATE',
+      data: {
+        id: idRef.current++,
+        isDone: false,
+        content,
+        date: new Date().getTime(),
+      },
+    });
   };
 
   const onUpdate = (targetId: number) => {
-    const targetTodoList = todoList.map((todo) =>
-      todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
-    );
-    setTodoList(targetTodoList);
+    dispatch({
+      type: 'UPDATE',
+      targetId: targetId,
+    });
   };
 
-  const onDelete = (id: number) => {
-    const filterTodoList = todoList.filter((todo) => todo.id !== id);
-    setTodoList(filterTodoList);
+  const onDelete = (targetId: number) => {
+    dispatch({
+      type: 'DELETE',
+      targetId: targetId,
+    });
   };
 
   return (

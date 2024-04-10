@@ -5,9 +5,9 @@ export type TodoItemType = {
   date : number;
 }
 
-export const nullTodoItem : TodoItemType[] = [{
+export const nullTodoItem : TodoItemType = {
   id : 0,
   isDone : false,
   content : '',
   date : 0,
-}]
+}

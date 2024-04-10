@@ -189,3 +189,5 @@ export default filterTodoList;
 - [ref prop로 전달하기](https://dori-coding.tistory.com/entry/React-ref%EB%A5%BC-prop%EC%9C%BC%EB%A1%9C-%EB%84%98%EA%B8%B0%EA%B8%B0-forwardRef)
 - [ref prop 전달시 Typescript 에러](https://seungddak.tistory.com/156)
 - [typescript onKeyDown 이벤트 처리](https://minjs.tistory.com/2)
+- [onkeydown key="Enter" 사용시 중복이슈](https://velog.io/@euji42/solved-한글-입력시-2번-입력이-되는-경우)
+- [onkeydown key="Enter" 사용시 중복이슈2]( https://medium.com/@1004wipi/한글-입력-시-중복-이벤트-발생-5dcdbb24526a)

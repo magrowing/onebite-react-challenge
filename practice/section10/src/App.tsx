@@ -84,8 +84,6 @@ function App() {
     });
   }, []);
 
-  useCallback(() => {}, []);
-
   return (
     <article className="App">
       <Header />

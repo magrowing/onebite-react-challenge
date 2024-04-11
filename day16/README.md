@@ -40,7 +40,7 @@ useMemo(() => { return 결과값}, []) // 👈🏻 useMemo는 결과값을 반�
 // src/components/List.tsx
 function List({ todoList, onDelete, onUpdate }: ListProps) {
 
-// ..(중략) ... 
+  // ..(중략) ... 
 
   const getAnalyzedData = () => {
     console.log('getAnalyzedData 호출!!');
@@ -58,7 +58,7 @@ function List({ todoList, onDelete, onUpdate }: ListProps) {
   const { totalCount, doneCount, notDoneCount } = getAnalyzedData();
 
 
-// ..(중략) ... 
+  // ..(중략) ... 
 }
 ```
 
@@ -68,7 +68,7 @@ function List({ todoList, onDelete, onUpdate }: ListProps) {
 // src/components/List.tsx
 function List({ todoList, onDelete, onUpdate }: ListProps) {
 
-// ..(중략) ... 
+  // ..(중략) ... 
 
   // useMemo를 통한 최적화
   const { totalCount, doneCount, notDoneCount } = useMemo(() => {
@@ -86,7 +86,7 @@ function List({ todoList, onDelete, onUpdate }: ListProps) {
   }, [todoList]);
 
 
-// ..(중략) ... 
+  // ..(중략) ... 
 }
 ```
 
@@ -214,7 +214,7 @@ useCallback(() => {}, []);
 #### 최상위 App 컴포넌트 내의 onDelete,onUpdate 최적화
 
 ```jsx
- const onCreate = useCallback((content: string) => {
+  const onCreate = useCallback((content: string) => {
     dispatch({
       type: 'CREATE',
       data: {

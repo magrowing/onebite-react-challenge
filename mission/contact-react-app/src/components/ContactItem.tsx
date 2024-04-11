@@ -1,3 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
+import { memo } from 'react';
+
 import './ContactItem.css';
 
 import { ContactItemType } from '../types';
@@ -7,7 +10,7 @@ type ContactItemProps = {
   OnDelete: (targetId: number) => void;
 };
 
-export default function ContactItem({ item, OnDelete }: ContactItemProps) {
+function ContactItem({ item, OnDelete }: ContactItemProps) {
   const { id, name, contact } = item;
 
   const handleDelete = () => {
@@ -23,3 +26,5 @@ export default function ContactItem({ item, OnDelete }: ContactItemProps) {
     </div>
   );
 }
+
+export default memo(ContactItem);

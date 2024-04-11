@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { useState, useRef, memo } from 'react';
 
 import './ContactEditor.css';
 
@@ -10,7 +11,7 @@ type ContactEditorProps = {
 
 const nullUser = { name: '', contact: '' };
 
-export default function ContactEditor({ onCreate }: ContactEditorProps) {
+function ContactEditor({ onCreate }: ContactEditorProps) {
   const [user, setUser] = useState(nullUser);
 
   const nameInput = useRef<HTMLInputElement>(null);
@@ -67,3 +68,5 @@ export default function ContactEditor({ onCreate }: ContactEditorProps) {
     </div>
   );
 }
+
+export default memo(ContactEditor);

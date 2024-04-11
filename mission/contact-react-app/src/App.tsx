@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useReducer, useRef } from 'react';
+import { useReducer, useRef, useCallback } from 'react';
 
 import './App.css';
 
@@ -50,23 +50,26 @@ function App() {
   const [contactList, dispatch] = useReducer(reducer, mockContactList);
   const idRef = useRef(3);
 
-  const onCreate = ({ name, contact }: { name: string; contact: string }) => {
-    dispatch({
-      type: 'CREATE',
-      data: {
-        id: idRef.current++,
-        name,
-        contact,
-      },
-    });
-  };
+  const onCreate = useCallback(
+    ({ name, contact }: { name: string; contact: string }) => {
+      dispatch({
+        type: 'CREATE',
+        data: {
+          id: idRef.current++,
+          name,
+          contact,
+        },
+      });
+    },
+    []
+  );
 
-  const OnDelete = (targetId: number) => {
+  const OnDelete = useCallback((targetId: number) => {
     dispatch({
       type: 'DELETE',
       targetId: targetId,
     });
-  };
+  }, []);
 
   return (
     <div className="App">

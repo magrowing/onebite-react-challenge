@@ -1,12 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useReducer, useRef, useCallback } from 'react';
+import { useReducer, useRef, useCallback, useMemo } from 'react';
 
 import './App.css';
 
 import ContactEditor from './components/ContactEditor';
 import ContactList from './components/ContactList';
 
-import { ContactItemType } from './types';
+import { ActionType, ContactItemType } from './types';
+import {
+  ContactDispatchContext,
+  ContactStateContext,
+} from './context/ContextStore';
 
 const mockContactList = [
   {
@@ -25,12 +30,6 @@ const mockContactList = [
     contact: 'hee123@gmail.com',
   },
 ];
-
-type ActionType = {
-  type: string;
-  data?: ContactItemType;
-  targetId?: number;
-};
 
 function reducer(
   state: ContactItemType[],
@@ -71,15 +70,23 @@ function App() {
     });
   }, []);
 
+  const memoizedDispatch = useMemo(() => {
+    return { onCreate, OnDelete };
+  }, []);
+
   return (
     <div className="App">
       <h2>Contact List</h2>
-      <section>
-        <ContactEditor onCreate={onCreate} />
-      </section>
-      <section>
-        <ContactList contactList={contactList} OnDelete={OnDelete} />
-      </section>
+      <ContactStateContext.Provider value={contactList}>
+        <ContactDispatchContext.Provider value={memoizedDispatch}>
+          <section>
+            <ContactEditor />
+          </section>
+          <section>
+            <ContactList />
+          </section>
+        </ContactDispatchContext.Provider>
+      </ContactStateContext.Provider>
     </div>
   );
 }

@@ -5,14 +5,13 @@ import './ContactEditor.css';
 
 import TextField from './TextField';
 
-type ContactEditorProps = {
-  onCreate: ({ name, contact }: { name: string; contact: string }) => void;
-};
+import { useContactDispatch } from '../context/ContextStore';
 
 const nullUser = { name: '', contact: '' };
 
-function ContactEditor({ onCreate }: ContactEditorProps) {
+function ContactEditor() {
   const [user, setUser] = useState(nullUser);
+  const { onCreate } = useContactDispatch();
 
   const nameInput = useRef<HTMLInputElement>(null);
   const contextInput = useRef<HTMLInputElement>(null);

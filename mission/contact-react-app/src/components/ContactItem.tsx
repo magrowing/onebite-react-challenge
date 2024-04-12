@@ -3,15 +3,13 @@ import { memo } from 'react';
 
 import './ContactItem.css';
 
+import { useContactDispatch } from '../context/ContextStore';
+
 import { ContactItemType } from '../types';
 
-type ContactItemProps = {
-  item: ContactItemType;
-  OnDelete: (targetId: number) => void;
-};
-
-function ContactItem({ item, OnDelete }: ContactItemProps) {
+function ContactItem({ item }: { item: ContactItemType }) {
   const { id, name, contact } = item;
+  const { OnDelete } = useContactDispatch();
 
   const handleDelete = () => {
     OnDelete(id);

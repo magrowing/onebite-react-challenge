@@ -4,13 +4,13 @@ import { ContactItemType, DispatchType } from '../types';
 
 
 /** Context 생성*/
-export const contactStateContext = createContext<ContactItemType[] | null>(null);
-export const contactDispatchContext = createContext<DispatchType | null>(null);
+export const ContactStateContext = createContext<ContactItemType[] | null>(null);
+export const ContactDispatchContext = createContext<DispatchType | null>(null);
 
 
 /** null 타입지정과 초기값으로 인해 별도로 hooks 생성 및 value 조건처리 후 사용 */
 export const useContactState = () => {
-  const value = useContext(contactStateContext); 
+  const value = useContext(ContactStateContext); 
   if(!value){
     throw new Error('cannot find useContactState');
   }
@@ -18,7 +18,7 @@ export const useContactState = () => {
 }
 
 export const useContactDispatch = () => {
-  const value = useContext(contactDispatchContext); 
+  const value = useContext(ContactDispatchContext); 
   if(!value){
     throw new Error('cannot find useContactDispatch');
   }

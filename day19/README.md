@@ -258,22 +258,24 @@ const onDelete = (id: number) => {
 ### 상태와 이벤트 함수를 Context를 이용해서 공급
 
 ```jsx
-const DiaryStateContext = createContext<TodoItemType[]>([]);
-const DiaryDispatchContext = createContext({});
+  //..(중략).. 
+  
+  const DiaryStateContext = createContext<TodoItemType[]>([]);
+  const DiaryDispatchContext = createContext({});
 
-//..(중략).. 
+  //..(중략).. 
 
-return (
-    <DiaryStateContext.Provider value={data}>
-      <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/new" element={<New />} />
-          <Route path="/diary/:id" element={<Diary />} />
-          <Route path="/editor/:id" element={<Editor />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </DiaryDispatchContext.Provider>
-    </DiaryStateContext.Provider>
+  return (
+      <DiaryStateContext.Provider value={data}>
+        <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/new" element={<New />} />
+            <Route path="/diary/:id" element={<Diary />} />
+            <Route path="/editor/:id" element={<Editor />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </DiaryDispatchContext.Provider>
+      </DiaryStateContext.Provider>
   );
 ```

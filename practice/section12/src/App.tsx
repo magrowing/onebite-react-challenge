@@ -15,8 +15,8 @@ import { TodoItemType } from './types';
 
 import { mockDate } from './mocks/mockDate';
 
-const DiaryStateContext = createContext<TodoItemType[]>([]);
-const DiaryDispatchContext = createContext({});
+export const DiaryStateContext = createContext<TodoItemType[]>([]);
+export const DiaryDispatchContext = createContext({});
 
 export default function App() {
   const [data, dispatch] = useReducer(reducer, mockDate);
@@ -64,7 +64,13 @@ export default function App() {
 
   return (
     <DiaryStateContext.Provider value={data}>
-      <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
+      <DiaryDispatchContext.Provider
+        value={{
+          onCreate,
+          onUpdate,
+          onDelete,
+        }}
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<New />} />

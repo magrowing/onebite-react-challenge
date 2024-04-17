@@ -1,0 +1,94 @@
+.MenuBar {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+
+  select {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: rgb(236, 236, 236);
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  button {
+    flex: 1;
+  }
+}
+
+.DiaryList {
+  &__wrap {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.DiaryItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgb(236, 236, 236);
+
+  .emotion-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    height: 80px;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+
+    &__1 {
+      background-color: rgb(100, 201, 100);
+    }
+
+    &__2 {
+      background-color: rgb(157, 215, 114);
+    }
+
+    &__3 {
+      background-color: rgb(253, 206, 23);
+    }
+
+    &__4 {
+      background-color: rgb(253, 132, 70);
+    }
+
+    &__5 {
+      background-color: rgb(253, 86, 95);
+    }
+
+    img {
+      max-width: 50%;
+      width: 100%;
+    }
+  }
+
+  .info {
+    flex: 1;
+    cursor: pointer;
+
+    &__date {
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    &__content {
+      font-size: 18px;
+      margin: 0;
+    }
+  }
+
+  .btn {
+    button {
+      min-width: 70px;
+    }
+  }
+}

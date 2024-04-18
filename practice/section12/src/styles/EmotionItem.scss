@@ -1,0 +1,42 @@
+.EmotionItem {
+  background-color: rgb(236, 236, 236);
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+
+  &__img {
+    width: 50%;
+    margin-bottom: 10px;
+  }
+
+  &__name {
+    display: block;
+    font-size: 18px;
+  }
+
+  &__On1 {
+    background-color: rgb(100, 201, 100);
+    color: #fff;
+  }
+
+  &__On2 {
+    background-color: rgb(157, 215, 114);
+    color: #fff;
+  }
+
+  &__On3 {
+    background-color: rgb(253, 206, 23);
+    color: #fff;
+  }
+
+  &__On4 {
+    background-color: rgb(253, 132, 70);
+    color: #fff;
+  }
+
+  &__On5 {
+    background-color: rgb(253, 86, 95);
+    color: #fff;
+  }
+}

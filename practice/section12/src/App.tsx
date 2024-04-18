@@ -6,17 +6,17 @@ import './App.css';
 import Home from './pages/Home';
 import New from './pages/New';
 import Diary from './pages/Diary';
-import Editor from './pages/Editor';
+import Edit from './pages/Edit';
 import NotFound from './pages/NotFound';
 
 import { reducer } from './utils/reducer';
 
-import { TodoItemType } from './types';
+import { DispatchType, TodoItemType } from './types';
 
 import { mockDate } from './mocks/mockDate';
 
-export const DiaryStateContext = createContext<TodoItemType[]>([]);
-export const DiaryDispatchContext = createContext({});
+export const DiaryStateContext = createContext<TodoItemType[] | null>(null);
+export const DiaryDispatchContext = createContext<DispatchType | null>(null);
 
 export default function App() {
   const [data, dispatch] = useReducer(reducer, mockDate);
@@ -75,7 +75,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<New />} />
           <Route path="/diary/:id" element={<Diary />} />
-          <Route path="/editor/:id" element={<Editor />} />
+          <Route path="/edit/:id" element={<Edit />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </DiaryDispatchContext.Provider>

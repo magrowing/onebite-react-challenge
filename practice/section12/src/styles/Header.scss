@@ -1,9 +1,18 @@
 .Header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  width: 100%;
   padding: 20px 0;
   border-bottom: 1px solid rgb(226, 226, 226);
+
+  &__left {
+    width: 25%;
+  }
+
+  &__right {
+    width: 25%;
+    text-align: right;
+  }
 
   &__center {
     width: 50%;

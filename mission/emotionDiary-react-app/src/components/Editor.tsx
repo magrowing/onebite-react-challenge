@@ -54,6 +54,7 @@ export default function Editor({ onSubmit }: EditorProps) {
         <h4>오늘의 날짜</h4>
         <input
           type="date"
+          name="createdDate"
           value={getStringedDate(form.createdDate)}
           onChange={handleOnChangeForm}
         />
@@ -85,6 +86,7 @@ export default function Editor({ onSubmit }: EditorProps) {
         <h4>오늘의 일기</h4>
         <textarea
           placeholder="오늘은 어땠나요?"
+          name="content"
           value={form.content}
           onChange={handleOnChangeForm}
         ></textarea>

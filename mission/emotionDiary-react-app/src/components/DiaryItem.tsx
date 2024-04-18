@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { DiaryDispatchContext } from '../App';
+import { useDiaryDispatchContext } from '../contexts/useContext';
 
 import Button from './Button';
 
@@ -16,7 +15,7 @@ type DiaryItemProps = {
 export default function DiaryItem({ item }: DiaryItemProps) {
   const { id, emotionId, createdDate, content } = item;
   const navigate = useNavigate();
-  const { onDelete } = useContext(DiaryDispatchContext);
+  const { onDelete } = useDiaryDispatchContext();
 
   return (
     <li className="DiaryItem">
@@ -29,17 +28,17 @@ export default function DiaryItem({ item }: DiaryItemProps) {
         <img src={getEmotionImages(emotionId)} alt="감정 이미지" />
       </figure>
       <dl
-        className="info"
+        className="DiaryItem__info"
         onClick={() => {
           navigate(`/diary/${id}`);
         }}
       >
-        <dt className="info__date">
+        <dt className="DiaryItem__info-date">
           {new Date(createdDate).toLocaleDateString()}
         </dt>
-        <dd className="info__content">{content}</dd>
+        <dd className="DiaryItem__info-content">{content}</dd>
       </dl>
-      <div className="btn">
+      <div className="DiaryItem__btn">
         <Button
           text="수정하기"
           onClick={() => {

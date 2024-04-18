@@ -1,6 +1,7 @@
-import { createContext, useReducer, useRef } from 'react';
-
+import { useReducer, useRef } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import { DiaryDispatchContext, DiaryStateContext } from './contexts/useContext';
 
 import routes from './routes';
 
@@ -8,14 +9,9 @@ import './App.css';
 
 import { reduce } from './utils/reduce';
 
-import { DiaryItemType } from './types';
-
 import { mockDate } from './mocks/mockDate';
 
 const router = createBrowserRouter(routes);
-
-export const DiaryStateContext = createContext<DiaryItemType[]>([]);
-export const DiaryDispatchContext = createContext({});
 
 function App() {
   const [diaryList, dispatch] = useReducer(reduce, mockDate);

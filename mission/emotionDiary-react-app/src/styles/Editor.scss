@@ -1,0 +1,50 @@
+.Editor {
+  padding-bottom: 40px;
+
+  >div {
+    margin-top: 40px;
+  }
+
+  h4 {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  input[type='date'] {
+    padding: 10px 20px;
+    background-color: rgb(236, 236, 236);
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 20px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 5px;
+    resize: none;
+    box-sizing: border-box;
+    border: none;
+    font-size: 18px;
+  }
+
+  &__emotion {
+
+    ul {
+      display: flex;
+      justify-content: space-around;
+      gap: 2%;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

@@ -4,8 +4,8 @@ import '../styles/Header.scss';
 
 type HeaderProps = {
   title: string;
-  leftChild: ReactNode;
-  rightChild: ReactNode;
+  leftChild?: ReactNode;
+  rightChild?: ReactNode;
 };
 
 function Header({ title, leftChild, rightChild }: HeaderProps) {

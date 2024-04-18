@@ -11,6 +11,22 @@ export interface ActionType {
   id?: number,
 }
 
+
+export interface DispatchType {
+  onCreate : (
+    createdDate: number,
+    emotionId: number,
+    content: string
+  ) => void; 
+  onUpdate : (
+    id: number,
+    createdDate: number,
+    emotionId: number,
+    content: string 
+  ) => void; 
+  onDelete : (id: number) => void; 
+}
+
 export const nullDiaryItem : DiaryItemType = {
   id : -1, 
   createdDate : 0, 

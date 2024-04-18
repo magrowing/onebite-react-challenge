@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
-import { DiaryStateContext } from '../App';
+import { useDiaryStateContext } from '../contexts/useContext';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -10,7 +10,7 @@ import getMonthlyList from '../utils/getMonthlyList';
 
 function Home() {
   const [pivotDate, setPivotDate] = useState(new Date());
-  const diaryList = useContext(DiaryStateContext);
+  const diaryList = useDiaryStateContext();
   const MonthlyList = getMonthlyList(diaryList, pivotDate);
 
   const DeCreaseDate = () => {

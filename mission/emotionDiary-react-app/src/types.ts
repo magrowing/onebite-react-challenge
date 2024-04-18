@@ -5,12 +5,16 @@ export type DiaryItemType = {
   content : string, 
 }
 
+export type FormType = {
+  createdDate: Date,
+  emotionId: number,
+  content: string,
+}
 export interface ActionType {
   type : string; 
   date? : DiaryItemType; 
   id?: number,
 }
-
 
 export interface DispatchType {
   onCreate : (

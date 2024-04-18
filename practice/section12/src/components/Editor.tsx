@@ -9,32 +9,37 @@ import Button from './Button';
 
 import getStringedDate from '../utils/getStringedDate';
 
-import { onCreateType } from '../types';
+import emotionList from '../mocks/emotionList';
 
-const EmotionList = [
-  { emotionId: 1, emotionName: '완전좋음' },
-  { emotionId: 2, emotionName: '좋음' },
-  { emotionId: 3, emotionName: '그럭저럭' },
-  { emotionId: 4, emotionName: '나쁨' },
-  { emotionId: 5, emotionName: '끔찍함' },
-];
+import { onCreateType, onSubmitType } from '../types';
 
 type EditorProps = {
   onSubmit: (input: onCreateType) => void;
+  diaryItem?: onSubmitType;
 };
 
-export default function Editor({ onSubmit }: EditorProps) {
-  const [input, setInput] = useState({
-    createdDate: new Date(),
-    emotionId: 3,
-    content: '',
-  });
+export default function Editor({ onSubmit, diaryItem }: EditorProps) {
+  const [input, setInput] = useState(
+    diaryItem
+      ? {
+          ...diaryItem,
+          createdDate: new Date(diaryItem.createdDate),
+        }
+      : {
+          createdDate: new Date(),
+          emotionId: 3,
+          content: '',
+        }
+  );
   const navigator = useNavigate();
 
-  const onChangeInput = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    let { value }: { value: string | Date | number } = event.target;
+  const onChangeInput = (event: {
+    target: {
+      name: string;
+      value: string | Date | number;
+    };
+  }) => {
+    let { value } = event.target;
     let { name } = event.target;
 
     if (name === 'createdDate') {
@@ -50,13 +55,6 @@ export default function Editor({ onSubmit }: EditorProps) {
       [name]: value,
     });
   };
-
-  // const onClickInput = (emotionId: number) => {
-  //   setInput({
-  //     ...input,
-  //     emotionId,
-  //   });
-  // };
 
   const onClickOnSubmit = () => {
     onSubmit(input);
@@ -80,7 +78,7 @@ export default function Editor({ onSubmit }: EditorProps) {
       <div className="Editor__emotion">
         <h4>오늘의 감정</h4>
         <ul>
-          {EmotionList.map((item) => {
+          {emotionList.map((item) => {
             const key = `emotion${item.emotionId}`;
             return (
               <EmotionItem

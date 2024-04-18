@@ -8,7 +8,7 @@ type EmotionItemProps = {
     emotionName: string;
   };
   isSelected: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export default function EmotionItem({

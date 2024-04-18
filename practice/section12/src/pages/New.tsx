@@ -13,6 +13,7 @@ const New = () => {
   const navigate = useNavigate();
 
   const onSubmit = (input: onCreateType) => {
+    console.log('새로운 아이템');
     onCreate(input.createdDate.getTime(), input.emotionId, input.content);
     navigate('/', { replace: true });
   };

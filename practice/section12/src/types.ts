@@ -17,6 +17,20 @@ export type onCreateType = {
   content : string,
 }
 
+export type onUpdateType = {
+  id: number;
+  createdDate : Date, 
+  emotionId : number, 
+  content : string,
+}
+
+export type onSubmitType = {
+  id?: number;
+  createdDate : Date | number, 
+  emotionId : number, 
+  content : string,
+}
+
 export type DispatchType = {
   onCreate : ( createdDate: number,
     emotionId: number,

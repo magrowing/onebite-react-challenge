@@ -42,7 +42,7 @@ export default function DiaryList({ data }: DiaryListProps) {
       </div>
       <ul className="DiaryList__wrap">
         {sortedData.map((item) => (
-          <DiaryItem key={item.id} item={item} />
+          <DiaryItem key={`item-${item.id}`} item={item} />
         ))}
       </ul>
     </section>

@@ -8,12 +8,17 @@ export const reduce = (
     case 'CREATE': {
       return [action.date ?? nullDiaryItem, ...state];
     }
-    case 'UPDATE': {
+    case 'DELETE': {
       return state.filter((item) => item.id !== action.id);
     }
-    case 'DELETE': {
-      return state.filter((item) =>
-        item.id === action.id ? action.date : item
+    case 'UPDATE': {
+      return state.map((item) => {
+        if(action.date){
+          return item.id === action.date.id ? action.date : item
+        }else{
+          return item;
+        }
+      }
       );
     }
     default:

@@ -1,0 +1,77 @@
+.Viewer {
+  width: 100%;
+  text-align: center;
+
+  >div {
+    margin-top: 40px;
+  }
+
+  h4 {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 20px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 5px;
+    resize: none;
+    box-sizing: border-box;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  &__emotion {
+
+    &-area {
+      max-width: 200px;
+      margin: 0 auto;
+      padding: 30px;
+      border-radius: 5px;
+
+      span {
+        display: block;
+        font-size: 25px;
+        color: #fff;
+      }
+    }
+
+    &-area1 {
+      background-color: rgb(100, 201, 100);
+    }
+
+    &-area2 {
+      background-color: rgb(157, 215, 114);
+    }
+
+    &-area3 {
+      background-color: rgb(253, 206, 23);
+    }
+
+    &-area4 {
+      background-color: rgb(253, 132, 70);
+    }
+
+    &-area5 {
+      background-color: rgb(253, 86, 95);
+    }
+  }
+
+  &__content {
+    p {
+      width: 100%;
+      min-height: 200px;
+      padding: 20px;
+      background-color: rgb(236, 236, 236);
+      border-radius: 5px;
+      box-sizing: border-box;
+      border: none;
+      font-size: 18px;
+      text-align: left;
+      line-height: 2.5;
+    }
+  }
+}

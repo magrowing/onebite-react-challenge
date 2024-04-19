@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '../styles/Editor.scss';
@@ -8,20 +8,30 @@ import EmotionItem from './EmotionItem';
 
 import getStringedDate from '../utils/getStringedDate';
 
-import { FormType } from '../types';
+import { DiaryItemType, FormType } from '../types';
 
 import { emotionList } from '../fixtures/emotionList';
 
 type EditorProps = {
   onSubmit: (form: FormType) => void;
+  initDate?: DiaryItemType;
 };
 
-export default function Editor({ onSubmit }: EditorProps) {
+export default function Editor({ onSubmit, initDate }: EditorProps) {
   const [form, setForm] = useState({
     createdDate: new Date(),
     emotionId: 3,
     content: '',
   });
+
+  useEffect(() => {
+    if (initDate) {
+      setForm({
+        ...initDate,
+        createdDate: new Date(initDate.createdDate),
+      });
+    }
+  }, [initDate]);
 
   const navigate = useNavigate();
 
@@ -63,7 +73,7 @@ export default function Editor({ onSubmit }: EditorProps) {
         <h4>오늘의 감정</h4>
         <ul>
           {emotionList.map((item) => {
-            const key = `emotionItem__${item.emotionName}`;
+            const key = `emotionItem__${item.emotionId}`;
             return (
               <EmotionItem
                 key={key}

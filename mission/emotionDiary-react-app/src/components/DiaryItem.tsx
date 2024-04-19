@@ -42,7 +42,7 @@ export default function DiaryItem({ item }: DiaryItemProps) {
         <Button
           text="수정하기"
           onClick={() => {
-            navigate(`/editor/${id}`);
+            navigate(`/edit/${id}`);
           }}
         />
         <Button

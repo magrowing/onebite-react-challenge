@@ -37,3 +37,9 @@ export const nullDiaryItem : DiaryItemType = {
   emotionId : 0, 
   content : ''
 }
+
+export const nullForm : FormType = {
+  createdDate: new Date('0000-00-00'),
+  emotionId: 0,
+  content: '',
+}

@@ -1,34 +1,26 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import NotFound from './NotFound';
 import Header from '../components/Header';
 import Button from '../components/Button';
-import View from '../components/View';
-
-import { useDiaryStateContext } from '../hooks/useContext';
+import Viewer from '../components/Viewer';
 
 import getStringedDate from '../utils/getStringedDate';
-import getDiaryItem from '../utils/getDiaryItem';
+
+import useDiary from '../hooks/useDiary';
 
 const Diary = () => {
   const param = useParams();
   const navigation = useNavigate();
+  const curDiaryItem = useDiary(param.id ?? '');
 
-  const data = useDiaryStateContext();
-  const diaryItem = getDiaryItem(data, param.id);
-
-  if (!diaryItem) {
-    return (
-      <article>
-        <NotFound />
-      </article>
-    );
+  if (curDiaryItem.id === -1) {
+    return <div>로딩중...</div>;
   }
 
   return (
     <article>
       <Header
-        title={`${getStringedDate(new Date(diaryItem.createdDate))} 기록`}
+        title={`${getStringedDate(new Date(curDiaryItem.createdDate))} 기록`}
         leftChild={
           <Button text={'< 뒤로가기'} onClick={() => navigation(-1)} />
         }
@@ -41,7 +33,7 @@ const Diary = () => {
           />
         }
       />
-      <View diaryItem={diaryItem} />
+      <Viewer diaryItem={curDiaryItem} />
     </article>
   );
 };

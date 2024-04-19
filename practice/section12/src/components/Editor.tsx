@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '../styles/Editor.scss';
@@ -11,27 +11,30 @@ import getStringedDate from '../utils/getStringedDate';
 
 import emotionList from '../mocks/emotionList';
 
-import { onCreateType, onSubmitType } from '../types';
+import { TodoItemType, onCreateType } from '../types';
 
 type EditorProps = {
   onSubmit: (input: onCreateType) => void;
-  diaryItem?: onSubmitType;
+  initData?: TodoItemType;
 };
 
-export default function Editor({ onSubmit, diaryItem }: EditorProps) {
-  const [input, setInput] = useState(
-    diaryItem
-      ? {
-          ...diaryItem,
-          createdDate: new Date(diaryItem.createdDate),
-        }
-      : {
-          createdDate: new Date(),
-          emotionId: 3,
-          content: '',
-        }
-  );
+export default function Editor({ onSubmit, initData }: EditorProps) {
+  const [input, setInput] = useState({
+    createdDate: new Date(),
+    emotionId: 3,
+    content: '',
+  });
+
   const navigator = useNavigate();
+
+  useEffect(() => {
+    if (initData) {
+      setInput({
+        ...initData,
+        createdDate: new Date(Number(initData.createdDate)),
+      });
+    }
+  }, [initData]);
 
   const onChangeInput = (event: {
     target: {

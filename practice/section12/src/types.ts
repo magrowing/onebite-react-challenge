@@ -41,3 +41,11 @@ export type DispatchType = {
     content: string) => void;
   onDelete : (id: number) => void;
 }
+
+
+export const nullCurDiaryItem : TodoItemType ={
+  id : -1, 
+  createdDate : 0, 
+  emotionId : 1, 
+  content : '',
+}

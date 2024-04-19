@@ -1,46 +1,45 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useParams, useNavigate } from 'react-router-dom';
-
-import NotFound from './NotFound';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
 import Editor from '../components/Editor';
 
-import {
-  useDiaryDispatchContext,
-  useDiaryStateContext,
-} from '../hooks/useContext';
-
-import getDiaryItem from '../utils/getDiaryItem';
+import { useDiaryDispatchContext } from '../hooks/useContext';
 
 import { onCreateType } from '../types';
+import useDiary from '../hooks/useDiary';
 
 const Edit = () => {
   const param = useParams();
   const navigate = useNavigate();
-
-  const data = useDiaryStateContext();
   const { onDelete, onUpdate } = useDiaryDispatchContext();
 
-  const diaryItem = getDiaryItem(data, param.id);
+  const curDiaryItem = useDiary(param.id ?? '');
 
-  const onSubmit = (input: onCreateType) => {
-    onUpdate(
-      Number(param.id),
-      input.createdDate.getTime(),
-      input.emotionId,
-      input.content
-    );
-    navigate('/', { replace: true });
+  if (curDiaryItem.id === -1) {
+    return <div>로딩중...</div>;
+  }
+
+  // 일기 삭제 로직
+  const onClickDelete = () => {
+    if (window.confirm('일기를 정말 삭제할까요? 다시 복구되지 않아요!')) {
+      onDelete(Number(param.id));
+      navigate('/', { replace: true });
+    }
   };
 
-  if (!diaryItem) {
-    return (
-      <article>
-        <NotFound />
-      </article>
-    );
-  }
+  const onSubmit = (input: onCreateType) => {
+    if (window.confirm('일기를 수정하시겠습니다까?')) {
+      onUpdate(
+        Number(param.id),
+        input.createdDate.getTime(),
+        input.emotionId,
+        input.content
+      );
+      navigate('/', { replace: true });
+    }
+  };
 
   return (
     <article>
@@ -58,14 +57,11 @@ const Edit = () => {
           <Button
             text={'삭제하기'}
             styleType="NEGATIVE"
-            onClick={() => {
-              onDelete(Number(param.id));
-              navigate('/', { replace: true });
-            }}
+            onClick={onClickDelete}
           />
         }
       />
-      <Editor onSubmit={onSubmit} diaryItem={diaryItem} />
+      <Editor onSubmit={onSubmit} initData={curDiaryItem} />
     </article>
   );
 };

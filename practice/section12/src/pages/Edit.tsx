@@ -7,6 +7,7 @@ import Editor from '../components/Editor';
 
 import { useDiaryDispatchContext } from '../hooks/useContext';
 import useDiary from '../hooks/useDiary';
+import usePageTitle from '../hooks/usePageTitle';
 
 import { onCreateType } from '../types';
 
@@ -16,6 +17,8 @@ const Edit = () => {
   const { onDelete, onUpdate } = useDiaryDispatchContext();
 
   const curDiaryItem = useDiary(param.id ?? '');
+
+  usePageTitle(`${param.id ?? `존재하지 않는`}번 일기 수정`);
 
   if (curDiaryItem.id === -1) {
     return <div>로딩중...</div>;

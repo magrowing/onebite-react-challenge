@@ -7,11 +7,14 @@ import Viewer from '../components/Viewer';
 import getStringedDate from '../utils/getStringedDate';
 
 import useDiary from '../hooks/useDiary';
+import usePageTitle from '../hooks/usePageTitle';
 
 const Diary = () => {
   const param = useParams();
   const navigation = useNavigate();
   const curDiaryItem = useDiary(param.id ?? '');
+
+  usePageTitle(`${param.id ?? `존재하지 않는`}번 일기`);
 
   if (curDiaryItem.id === -1) {
     return <div>로딩중...</div>;

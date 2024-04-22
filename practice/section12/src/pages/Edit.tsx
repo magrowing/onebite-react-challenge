@@ -6,9 +6,9 @@ import Button from '../components/Button';
 import Editor from '../components/Editor';
 
 import { useDiaryDispatchContext } from '../hooks/useContext';
+import useDiary from '../hooks/useDiary';
 
 import { onCreateType } from '../types';
-import useDiary from '../hooks/useDiary';
 
 const Edit = () => {
   const param = useParams();

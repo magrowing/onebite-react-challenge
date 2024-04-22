@@ -7,6 +7,7 @@ export type TodoItemType = {
 
 export type ActionType = {
   type: string;
+  initData? :  TodoItemType[];
   data?: TodoItemType;
   id?: number;
 };

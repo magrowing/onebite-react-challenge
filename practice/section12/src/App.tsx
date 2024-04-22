@@ -1,4 +1,4 @@
-import { useReducer, useRef, createContext } from 'react';
+import { useReducer, useRef, createContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
@@ -13,14 +13,41 @@ import { reducer } from './utils/reducer';
 
 import { DispatchType, TodoItemType } from './types';
 
-import { mockDate } from './mocks/mockDate';
-
 export const DiaryStateContext = createContext<TodoItemType[] | null>(null);
 export const DiaryDispatchContext = createContext<DispatchType | null>(null);
 
 export default function App() {
-  const [data, dispatch] = useReducer(reducer, mockDate);
-  const idRef = useRef(3);
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, dispatch] = useReducer(reducer, []);
+  const idRef = useRef(0);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem('diary');
+    if (!storedData) {
+      setIsLoading(false);
+      return;
+    }
+    const parsedData = JSON.parse(storedData);
+    if (!Array.isArray(parsedData)) {
+      setIsLoading(false);
+      return;
+    }
+
+    let maxId = 0;
+    parsedData.forEach((item) => {
+      if (Number(item.id) > maxId) {
+        maxId = Number(item.id);
+      }
+    });
+
+    idRef.current = maxId + 1;
+
+    dispatch({
+      type: 'INIT',
+      initData: parsedData,
+    });
+    setIsLoading(false);
+  }, []);
 
   const onCreate = (
     createdDate: number,
@@ -61,6 +88,10 @@ export default function App() {
       id,
     });
   };
+
+  if (isLoading) {
+    return <div>Loading.....</div>;
+  }
 
   return (
     <DiaryStateContext.Provider value={data}>
